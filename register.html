@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - The Repeaters Official</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <style>
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .auth-box {
+            background: white;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .auth-header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .auth-header .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .auth-header h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .auth-body {
+            padding: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+            outline: none;
+        }
+        
+        .password-input {
+            position: relative;
+        }
+        
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #7f8c8d;
+            cursor: pointer;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .form-check {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .form-check input {
+            margin-top: 5px;
+            width: 18px;
+            height: 18px;
+        }
+        
+        .form-check label {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .form-check a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .form-check a:hover {
+            text-decoration: underline;
+        }
+        
+        .btn-auth {
+            width: 100%;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 25px 0;
+            position: relative;
+        }
+        
+        .divider:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 45%;
+            height: 1px;
+            background: #e0e0e0;
+        }
+        
+        .divider:after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            width: 45%;
+            height: 1px;
+            background: #e0e0e0;
+        }
+        
+        .divider span {
+            background: white;
+            padding: 0 15px;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        .btn-google {
+            background: #fff;
+            color: #333;
+            border: 2px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn-google:hover {
+            background: #f8f9fa;
+            border-color: #ddd;
+        }
+        
+        .auth-footer {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            color: #7f8c8d;
+        }
+        
+        .auth-footer a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .alert {
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .back-home {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #3498db;
+            text-decoration: none;
+            margin-bottom: 20px;
+        }
+        
+        .back-home:hover {
+            text-decoration: underline;
+        }
+        
+        .password-strength {
+            margin-top: 5px;
+            font-size: 12px;
+        }
+        
+        .strength-bar {
+            height: 5px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+        
+        .strength-fill {
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        .strength-weak {
+            background: #e74c3c;
+        }
+        
+        .strength-medium {
+            background: #f39c12;
+        }
+        
+        .strength-strong {
+            background: #2ecc71;
+        }
+        
+        .exam-interests {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .interest-title {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .interest-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .interest-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .interest-checkbox input {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .interest-checkbox label {
+            font-size: 14px;
+            color: #666;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-box">
+            <div class="auth-header">
+                <div class="logo">
+                    <div class="logo-icon" style="background: white; color: #3498db; width: 40px; height: 40px;">
+                        <i class="fas fa-redo-alt"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h2>The Repeaters Official</h2>
+                        <p>Government Exam Mentorship</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="auth-body">
+                <a href="index.html" class="back-home">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+                
+                <div class="alert" id="registerAlert"></div>
+                
+                <h3 style="margin-bottom: 25px; color: #2c3e50;">Create Your Account</h3>
+                
+                <form id="registerForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName"><i class="fas fa-user"></i> First Name</label>
+                            <input type="text" id="firstName" class="form-control" placeholder="Enter first name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="lastName"><i class="fas fa-user"></i> Last Name</label>
+                            <input type="text" id="lastName" class="form-control" placeholder="Enter last name" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email"><i class="fas fa-envelope"></i> Email Address</label>
+                        <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone"><i class="fas fa-phone"></i> Phone Number</label>
+                        <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password"><i class="fas fa-lock"></i> Password</label>
+                        <div class="password-input">
+                            <input type="password" id="password" class="form-control" placeholder="Create a password" required>
+                            <button type="button" class="toggle-password" id="togglePassword">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="password-strength">
+                            <span id="strengthText">Password strength: None</span>
+                            <div class="strength-bar">
+                                <div class="strength-fill" id="strengthBar"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword"><i class="fas fa-lock"></i> Confirm Password</label>
+                        <div class="password-input">
+                            <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm your password" required>
+                            <button type="button" class="toggle-password" id="toggleConfirmPassword">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Exam Interests -->
+                    <div class="exam-interests">
+                        <h4 class="interest-title"><i class="fas fa-graduation-cap"></i> Select Your Exam Interests</h4>
+                        <div class="interest-grid">
+                            <div class="interest-checkbox">
+                                <input type="checkbox" id="sscChsl" name="examInterest" value="ssc-chsl">
+                                <label for="sscChsl">SSC CHSL</label>
+                            </div>
+                            <div class="interest-checkbox">
+                                <input type="checkbox" id="sscCgl" name="examInterest" value="ssc-cgl">
+                                <label for="sscCgl">SSC CGL</label>
+                            </div>
+                            <div class="interest-checkbox">
+                                <input type="checkbox" id="sscMts" name="examInterest" value="ssc-mts">
+                                <label for="sscMts">SSC MTS</label>
+                            </div>
+                            <div class="interest-checkbox">
+                                <input type="checkbox" id="selectionPhase" name="examInterest" value="selection-phase">
+                                <label for="selectionPhase">Selection Phase</label>
+                            </div>
+                            <div class="interest-checkbox">
+                                <input type="checkbox" id="ntpc" name="examInterest" value="ntpc">
+                                <label for="ntpc">Railway NTPC</label>
+                            </div>
+                            <div class="interest-checkbox">
+                                <input type="checkbox" id="oneDay" name="examInterest" value="one-day">
+                                <label for="oneDay">One Day Exams</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-check">
+                        <input type="checkbox" id="terms" required>
+                        <label for="terms">
+                            I agree to the <a href="terms.html">Terms & Conditions</a> and <a href="privacy.html">Privacy Policy</a>
+                        </label>
+                    </div>
+                    
+                    <div class="form-check">
+                        <input type="checkbox" id="newsletter" checked>
+                        <label for="newsletter">
+                            Send me study tips, exam updates, and promotional offers
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-auth">
+                        <i class="fas fa-user-plus"></i> Create Account
+                    </button>
+                </form>
+                
+                <div class="divider">
+                    <span>OR</span>
+                </div>
+                
+                <button class="btn btn-google btn-auth" id="googleRegisterBtn">
+                    <i class="fab fa-google"></i> Sign up with Google
+                </button>
+                
+                <div class="auth-footer">
+                    <p>Already have an account? <a href="login.html">Login Here</a></p>
+                    <p style="margin-top: 10px; font-size: 14px;">
+                        Get instant access to free study materials after registration
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const registerForm = document.getElementById('registerForm');
+            const togglePassword = document.getElementById('togglePassword');
+            const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            const registerAlert = document.getElementById('registerAlert');
+            const googleRegisterBtn = document.getElementById('googleRegisterBtn');
+            const strengthBar = document.getElementById('strengthBar');
+            const strengthText = document.getElementById('strengthText');
+            
+            // Check if user is already logged in
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (user) {
+                window.location.href = 'dashboard.html';
+            }
+            
+            // Toggle password visibility
+            togglePassword.addEventListener('click', function() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+            });
+            
+            toggleConfirmPassword.addEventListener('click', function() {
+                const type = confirmPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                confirmPasswordInput.setAttribute('type', type);
+                this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+            });
+            
+            // Password strength checker
+            passwordInput.addEventListener('input', function() {
+                const password = this.value;
+                let strength = 0;
+                let text = 'None';
+                
+                if (password.length >= 8) strength += 25;
+                if (/[A-Z]/.test(password)) strength += 25;
+                if (/[0-9]/.test(password)) strength += 25;
+                if (/[^A-Za-z0-9]/.test(password)) strength += 25;
+                
+                strengthBar.style.width = strength + '%';
+                
+                if (strength <= 25) {
+                    strengthBar.className = 'strength-fill strength-weak';
+                    text = 'Weak';
+                } else if (strength <= 50) {
+                    strengthBar.className = 'strength-fill strength-medium';
+                    text = 'Medium';
+                } else if (strength <= 75) {
+                    strengthBar.className = 'strength-fill strength-medium';
+                    text = 'Good';
+                } else {
+                    strengthBar.className = 'strength-fill strength-strong';
+                    text = 'Strong';
+                }
+                
+                strengthText.textContent = `Password strength: ${text}`;
+            });
+            
+            // Handle form submission
+            registerForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const firstName = document.getElementById('firstName').value;
+                const lastName = document.getElementById('lastName').value;
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                const terms = document.getElementById('terms').checked;
+                const newsletter = document.getElementById('newsletter').checked;
+                
+                // Get selected exam interests
+                const examInterests = [];
+                document.querySelectorAll('input[name="examInterest"]:checked').forEach(checkbox => {
+                    examInterests.push(checkbox.value);
+                });
+                
+                // Validation
+                if (password !== confirmPassword) {
+                    showAlert('Passwords do not match!', 'error');
+                    return;
+                }
+                
+                if (!terms) {
+                    showAlert('Please accept the terms and conditions', 'error');
+                    return;
+                }
+                
+                // Show loading
+                const submitBtn = registerForm.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
+                submitBtn.disabled = true;
+                
+                try {
+                    // Simulate API call
+                    await new Promise(resolve => setTimeout(resolve, 2000));
+                    
+                    // Mock registration - in real app, this would be an API call
+                    const userData = {
+                        id: 'user_' + Date.now(),
+                        firstName: firstName,
+                        lastName: lastName,
+                        fullName: `${firstName} ${lastName}`,
+                        email: email,
+                        phone: phone,
+                        role: 'student',
+                        examInterests: examInterests,
+                        newsletter: newsletter,
+                        joinDate: new Date().toISOString(),
+                        enrolledCourses: [],
+                        freeMaterials: true
+                    };
+                    
+                    // Store user data
+                    localStorage.setItem('user', JSON.stringify(userData));
+                    
+                    // Show success message
+                    showAlert('Registration successful! Redirecting to dashboard...', 'success');
+                    
+                    // Redirect to dashboard
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 1500);
+                    
+                } catch (error) {
+                    showAlert(error.message || 'Registration failed. Please try again.', 'error');
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }
+            });
+            
+            // Google registration
+            googleRegisterBtn.addEventListener('click', function() {
+                // In real app, this would trigger Firebase Google Auth
+                showAlert('Redirecting to Google authentication...', 'success');
+                
+                // Simulate Google registration
+                setTimeout(() => {
+                    const userData = {
+                        id: 'google_user_' + Date.now(),
+                        firstName: 'Google',
+                        lastName: 'User',
+                        fullName: 'Google User',
+                        email: 'demo@gmail.com',
+                        phone: '',
+                        role: 'student',
+                        examInterests: ['ssc-cgl', 'ssc-chsl'],
+                        newsletter: true,
+                        photoURL: 'https://via.placeholder.com/150',
+                        provider: 'google',
+                        joinDate: new Date().toISOString(),
+                        enrolledCourses: [],
+                        freeMaterials: true
+                    };
+                    
+                    localStorage.setItem('user', JSON.stringify(userData));
+                    showAlert('Google registration successful! Redirecting...', 'success');
+                    
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 1500);
+                }, 1000);
+            });
+            
+            // Show alert function
+            function showAlert(message, type) {
+                registerAlert.textContent = message;
+                registerAlert.className = `alert alert-${type}`;
+                registerAlert.style.display = 'block';
+                
+                // Auto hide after 5 seconds
+                setTimeout(() => {
+                    registerAlert.style.display = 'none';
+                }, 5000);
+            }
+        });
+    </script>
+</body>
+</html>
