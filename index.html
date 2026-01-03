@@ -3,107 +3,1186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Repeaters Official - SSC, CGL, MTS, NTPC Mentorship</title>
+    <title>The Repeaters Official - SSC, NTPC, One Day Exams Mentorship</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <style>
+        /* ===== CSS RESET & VARIABLES ===== */
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #3b82f6;
+            --secondary: #f59e0b;
+            --secondary-dark: #d97706;
+            --accent: #10b981;
+            --dark: #1e293b;
+            --dark-light: #334155;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --gray-light: #e2e8f0;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 30px rgba(0,0,0,0.15);
+            --shadow-xl: 0 20px 50px rgba(0,0,0,0.2);
+            
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 50px;
+            
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.8rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .highlight {
+            color: var(--primary);
+            position: relative;
+        }
+
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background-color: rgba(245, 158, 11, 0.2);
+            z-index: -1;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 32px;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            outline: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.7s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            background: linear-gradient(135deg, var(--secondary-dark), var(--secondary));
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .btn-lg {
+            padding: 18px 40px;
+            font-size: 1.1rem;
+        }
+
+        /* ===== NAVIGATION ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
+            z-index: 1000;
+            padding: 15px 0;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            padding: 10px 0;
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%);
+            animation: shine 3s infinite linear;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .logo-icon i {
+            font-size: 24px;
+            color: white;
+            z-index: 1;
+        }
+
+        .logo-text h1 {
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2px;
+        }
+
+        .logo-text p {
+            font-size: 0.85rem;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            padding: 8px 0;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--primary);
+        }
+
+        .mobile-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            padding: 160px 0 100px;
+            background: linear-gradient(135deg, #f0f7ff 0%, #e6f0ff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" opacity="0.05"><path d="M0 0h1200v1200H0V0zm200 200h800v800H200V200z" fill="%232563eb"/></svg>');
+            background-size: cover;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 30px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin: 40px 0;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat h3 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .stat h3 i {
+            font-size: 1.8rem;
+        }
+
+        .stat p {
+            font-size: 0.95rem;
+            color: var(--gray);
+            margin: 0;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image-main {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+        }
+
+        .hero-image-main::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.9;
+        }
+
+        .floating-badges {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .exam-badge {
+            position: absolute;
+            background: white;
+            padding: 12px 25px;
+            border-radius: var(--radius-full);
+            box-shadow: var(--shadow-lg);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .exam-badge i {
+            color: var(--primary);
+        }
+
+        .exam-badge:nth-child(1) {
+            top: 10%;
+            left: -20px;
+            color: var(--primary);
+            animation-delay: 0s;
+        }
+        .exam-badge:nth-child(2) {
+            top: 40%;
+            right: -20px;
+            color: var(--secondary);
+            animation-delay: 1s;
+        }
+        .exam-badge:nth-child(3) {
+            bottom: 20%;
+            left: -30px;
+            color: var(--accent);
+            animation-delay: 2s;
+        }
+        .exam-badge:nth-child(4) {
+            bottom: 10%;
+            right: 10px;
+            color: var(--dark);
+            animation-delay: 3s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* ===== EXAMS SECTION ===== */
+        .exams-section {
+            background: white;
+        }
+
+        .exams-filter {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 25px;
+            background: var(--light);
+            border: 2px solid var(--gray-light);
+            border-radius: var(--radius-full);
+            font-weight: 500;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .exams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .exam-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            border: 1px solid var(--gray-light);
+        }
+
+        .exam-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary-light);
+        }
+
+        .exam-header {
+            padding: 25px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .exam-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transform: translate(30px, -30px);
+        }
+
+        .exam-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.2);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .exam-icon i {
+            font-size: 28px;
+        }
+
+        .exam-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .exam-body {
+            padding: 25px;
+        }
+
+        .exam-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .exam-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            color: var(--gray);
+        }
+
+        .exam-features li i {
+            color: var(--accent);
+            font-size: 14px;
+        }
+
+        .exam-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--gray-light);
+        }
+
+        .exam-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .exam-price span {
+            font-size: 0.9rem;
+            color: var(--gray);
+            font-weight: 400;
+        }
+
+        /* ===== FEATURES SECTION ===== */
+        .features-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary), var(--accent));
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 32px;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .feature-card p {
+            color: var(--gray);
+        }
+
+        /* ===== TESTIMONIALS SECTION ===== */
+        .testimonials-section {
+            background: white;
+        }
+
+        .testimonials-slider {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .swiper {
+            padding: 20px 0 50px;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--gray-light);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 80px;
+            color: var(--primary-light);
+            opacity: 0.2;
+            font-family: serif;
+            line-height: 1;
+        }
+
+        .testimonial-content {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 30px;
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--primary-light);
+        }
+
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            font-size: 1.1rem;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .swiper-pagination-bullet {
+            width: 12px;
+            height: 12px;
+            background: var(--gray-light);
+            opacity: 1;
+        }
+
+        .swiper-pagination-bullet-active {
+            background: var(--primary);
+        }
+
+        /* ===== CTA SECTION ===== */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" opacity="0.05"><path d="M0 0h1200v1200H0V0zm200 200h800v800H200V200z" fill="white"/></svg>');
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-white:hover {
+            background: var(--light);
+            color: var(--primary-dark);
+        }
+
+        .btn-transparent {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .btn-transparent:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: white;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding-top: 80px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            color: white;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        .footer-col p {
+            color: #cbd5e1;
+            line-height: 1.8;
+            margin-top: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-light);
+            padding-left: 5px;
+        }
+
+        .contact-info li {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #cbd5e1;
+            margin-bottom: 15px;
+        }
+
+        .contact-info i {
+            color: var(--primary-light);
+            width: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .newsletter {
+            margin-top: 20px;
+        }
+
+        .newsletter p {
+            margin-bottom: 15px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 15px 20px;
+            background: transparent;
+            border: none;
+            color: white;
+            outline: none;
+        }
+
+        .newsletter-form input::placeholder {
+            color: #94a3b8;
+        }
+
+        .newsletter-form button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 25px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .newsletter-form button:hover {
+            background: var(--primary-dark);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 25px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-bottom p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .footer-bottom-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .footer-bottom-links a:hover {
+            color: var(--primary-light);
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 1024px) {
+            .hero .container {
+                gap: 40px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 140px 0 80px;
+            }
+            
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.4rem;
+            }
+            
+            .hero-stats {
+                justify-content: center;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            .mobile-toggle {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: white;
+                flex-direction: column;
+                padding: 40px 20px;
+                transition: var(--transition);
+                box-shadow: var(--shadow-lg);
+                z-index: 999;
+                overflow-y: auto;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+            
+            .exams-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-content h2 {
+                font-size: 2.2rem;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .hero-buttons .btn {
+                width: 100%;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .exam-badge {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .cta-buttons .btn {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" id="navbar">
         <div class="container nav-container">
-            <div class="logo">
+            <a href="#" class="logo">
                 <div class="logo-icon">
                     <i class="fas fa-redo-alt"></i>
                 </div>
                 <div class="logo-text">
-                    <h1>The Repeaters Official</h1>
-                    <p>Mentorship for Government Exams</p>
+                    <h1>The Repeaters</h1>
+                    <p>SSC | NTPC | One Day Exams</p>
                 </div>
-            </div>
+            </a>
             
             <div class="mobile-toggle" id="mobileToggle">
                 <i class="fas fa-bars"></i>
             </div>
             
             <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
-                <li><a href="courses.html"><i class="fas fa-book-open"></i> Courses</a></li>
-                <li class="dropdown">
-                    <a href="#"><i class="fas fa-graduation-cap"></i> Exams <i class="fas fa-chevron-down"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#ssc-chsl">SSC CHSL</a></li>
-                        <li><a href="#ssc-cgl">SSC CGL</a></li>
-                        <li><a href="#ssc-mts">SSC MTS</a></li>
-                        <li><a href="#selection-phase">Selection Phase</a></li>
-                        <li><a href="#ntpc">NTPC</a></li>
-                        <li><a href="#one-day">One Day Exams</a></li>
-                    </ul>
-                </li>
+                <li><a href="#home" class="active"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#exams"><i class="fas fa-book"></i> Exams</a></li>
                 <li><a href="#features"><i class="fas fa-star"></i> Features</a></li>
-                <li><a href="#testimonials"><i class="fas fa-comments"></i> Results</a></li>
+                <li><a href="#testimonials"><i class="fas fa-comment-dots"></i> Success Stories</a></li>
                 <li><a href="#contact"><i class="fas fa-phone-alt"></i> Contact</a></li>
-                <li id="authLinks">
-                    <a href="login.html" class="btn btn-login"><i class="fas fa-sign-in-alt"></i> Login</a>
-                    <a href="register.html" class="btn btn-signup"><i class="fas fa-user-plus"></i> Register</a>
-                </li>
-                <li id="userMenu" style="display: none;">
-                    <div class="user-dropdown">
-                        <a href="#" id="userName"><i class="fas fa-user-circle"></i> User</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                            <li><a href="#"><i class="fas fa-book"></i> My Courses</a></li>
-                            <li><a href="#"><i class="fas fa-download"></i> Study Material</a></li>
-                            <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
-                            <li><a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-                        </ul>
-                    </div>
+                <li>
+                    <a href="#" class="btn btn-primary">
+                        <i class="fas fa-user-plus"></i> Register Now
+                    </a>
                 </li>
             </ul>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="home">
         <div class="container">
             <div class="hero-content">
-                <h2>Crack Government Exams with <span>Expert Mentorship</span></h2>
-                <p>Join India's Most Effective Mentorship Program for SSC CHSL, CGL, MTS, Selection Phase, NTPC & All One Day Exams</p>
+                <h1>Crack <span class="highlight">Government Exams</span> with Expert Mentorship</h1>
+                <p>India's most trusted mentorship platform for SSC, NTPC, and all One Day Exams. Join thousands of successful candidates who secured their dream government jobs.</p>
+                
                 <div class="hero-stats">
                     <div class="stat">
-                        <h3>10,000+</h3>
+                        <h3><i class="fas fa-user-graduate"></i> 12,500+</h3>
                         <p>Students Selected</p>
                     </div>
                     <div class="stat">
-                        <h3>98%</h3>
+                        <h3><i class="fas fa-trophy"></i> 98.7%</h3>
                         <p>Success Rate</p>
                     </div>
                     <div class="stat">
-                        <h3>500+</h3>
-                        <p>Hours of Content</p>
+                        <h3><i class="fas fa-chalkboard-teacher"></i> 50+</h3>
+                        <p>Expert Mentors</p>
                     </div>
                 </div>
+                
                 <div class="hero-buttons">
-                    <a href="register.html" class="btn btn-primary btn-lg">
-                        <i class="fas fa-rocket"></i> Start Free Trial
+                    <a href="#exams" class="btn btn-primary btn-lg">
+                        <i class="fas fa-rocket"></i> Explore Courses
                     </a>
-                    <a href="#courses" class="btn btn-secondary btn-lg">
-                        <i class="fas fa-play-circle"></i> View Demo Class
+                    <a href="#" class="btn btn-outline btn-lg">
+                        <i class="fas fa-play-circle"></i> Free Demo Class
                     </a>
                 </div>
             </div>
+            
             <div class="hero-image">
-                <div class="floating-card">
-                    <div class="exam-badge">SSC CGL</div>
-                    <div class="exam-badge">CHSL</div>
-                    <div class="exam-badge">MTS</div>
-                    <div class="exam-badge">NTPC</div>
-                    <img src="assets/images/hero-mentor.png" alt="Mentorship Program">
+                <div class="hero-image-main"></div>
+                <div class="floating-badges">
+                    <div class="exam-badge">
+                        <i class="fas fa-file-alt"></i> SSC CGL
+                    </div>
+                    <div class="exam-badge">
+                        <i class="fas fa-train"></i> NTPC
+                    </div>
+                    <div class="exam-badge">
+                        <i class="fas fa-bolt"></i> One Day Exams
+                    </div>
+                    <div class="exam-badge">
+                        <i class="fas fa-graduation-cap"></i> CHSL/MTS
+                    </div>
                 </div>
             </div>
         </div>
@@ -113,93 +1192,172 @@
     <section class="exams-section" id="exams">
         <div class="container">
             <div class="section-title">
-                <h2>Comprehensive Mentorship Programs</h2>
-                <p>Specialized courses for each government exam with personalized guidance</p>
+                <h2>Our Mentorship Programs</h2>
+                <p>Specialized courses designed by experts for each government exam pattern</p>
+            </div>
+            
+            <div class="exams-filter">
+                <button class="filter-btn active" data-filter="all">All Exams</button>
+                <button class="filter-btn" data-filter="ssc">SSC Exams</button>
+                <button class="filter-btn" data-filter="ntpc">Railway NTPC</button>
+                <button class="filter-btn" data-filter="oneday">One Day Exams</button>
             </div>
             
             <div class="exams-grid">
-                <div class="exam-card" data-exam="ssc-chsl">
-                    <div class="exam-icon" style="background: linear-gradient(135deg, #3498db, #2c3e50);">
-                        <i class="fas fa-file-alt"></i>
+                <!-- SSC CGL Card -->
+                <div class="exam-card" data-category="ssc">
+                    <div class="exam-header">
+                        <div class="exam-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>SSC CGL</h3>
+                        <p>Combined Graduate Level Examination</p>
                     </div>
-                    <h3>SSC CHSL</h3>
-                    <p>Complete preparation for Combined Higher Secondary Level exam</p>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Tier I & II Preparation</li>
-                        <li><i class="fas fa-check"></i> Typing Test Training</li>
-                        <li><i class="fas fa-check"></i> Descriptive Paper</li>
-                    </ul>
-                    <button class="btn btn-outline enroll-btn" data-exam="chsl">Enroll Now</button>
+                    <div class="exam-body">
+                        <p>Complete preparation for all tiers of SSC CGL with focus on Quantitative Aptitude, English, Reasoning, and General Awareness.</p>
+                        
+                        <ul class="exam-features">
+                            <li><i class="fas fa-check-circle"></i> Tier I, II, III, IV Preparation</li>
+                            <li><i class="fas fa-check-circle"></i> 500+ Hours Live Classes</li>
+                            <li><i class="fas fa-check-circle"></i> 100+ Mock Tests</li>
+                            <li><i class="fas fa-check-circle"></i> Personal Mentor Support</li>
+                        </ul>
+                        
+                        <div class="exam-meta">
+                            <div class="exam-price">₹8,999 <span>/ Complete Course</span></div>
+                            <a href="#" class="btn btn-primary">Enroll Now</a>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="exam-card" data-exam="ssc-cgl">
-                    <div class="exam-icon" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
-                        <i class="fas fa-chart-line"></i>
+                <!-- Railway NTPC Card -->
+                <div class="exam-card" data-category="ntpc">
+                    <div class="exam-header" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                        <div class="exam-icon">
+                            <i class="fas fa-train"></i>
+                        </div>
+                        <h3>Railway NTPC</h3>
+                        <p>Non-Technical Popular Categories</p>
                     </div>
-                    <h3>SSC CGL</h3>
-                    <p>Graduate level exam preparation with advanced concepts</p>
-                    <ul>
-                        <li><i class="fas fa-check"></i> All Tier Preparation</li>
-                        <li><i class="fas fa-check"></i> Quantitative Aptitude</li>
-                        <li><i class="fas fa-check"></i> English & Reasoning</li>
-                    </ul>
-                    <button class="btn btn-outline enroll-btn" data-exam="cgl">Enroll Now</button>
+                    <div class="exam-body">
+                        <p>Comprehensive preparation for Railway NTPC CBT I & II with emphasis on Mathematics, General Intelligence, and General Awareness.</p>
+                        
+                        <ul class="exam-features">
+                            <li><i class="fas fa-check-circle"></i> CBT I & II Complete Syllabus</li>
+                            <li><i class="fas fa-check-circle"></i> Railway Specific GK</li>
+                            <li><i class="fas fa-check-circle"></i> 75+ Sectional Tests</li>
+                            <li><i class="fas fa-check-circle"></i> Previous Year Papers Analysis</li>
+                        </ul>
+                        
+                        <div class="exam-meta">
+                            <div class="exam-price">₹7,499 <span>/ Complete Course</span></div>
+                            <a href="#" class="btn btn-primary">Enroll Now</a>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="exam-card" data-exam="ssc-mts">
-                    <div class="exam-icon" style="background: linear-gradient(135deg, #2ecc71, #27ae60);">
-                        <i class="fas fa-tasks"></i>
+                <!-- One Day Exams Card -->
+                <div class="exam-card" data-category="oneday">
+                    <div class="exam-header" style="background: linear-gradient(135deg, #10b981, #059669);">
+                        <div class="exam-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>One Day Exams</h3>
+                        <p>Banking, Insurance & Other Exams</p>
                     </div>
-                    <h3>SSC MTS</h3>
-                    <p>Multi-Tasking Staff exam preparation with focus on basics</p>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Basic Mathematics</li>
-                        <li><i class="fas fa-check"></i> General English</li>
-                        <li><i class="fas fa-check"></i> Reasoning Ability</li>
-                    </ul>
-                    <button class="btn btn-outline enroll-btn" data-exam="mts">Enroll Now</button>
+                    <div class="exam-body">
+                        <p>Complete package for all one day competitive exams including Banking, Insurance, SSC CHSL, MTS, and other government exams.</p>
+                        
+                        <ul class="exam-features">
+                            <li><i class="fas fa-check-circle"></i> Banking PO/Clerk</li>
+                            <li><i class="fas fa-check-circle"></i> Insurance Exams</li>
+                            <li><i class="fas fa-check-circle"></i> SSC CHSL/MTS</li>
+                            <li><i class="fas fa-check-circle"></i> Daily Live Classes</li>
+                        </ul>
+                        
+                        <div class="exam-meta">
+                            <div class="exam-price">₹9,999 <span>/ Complete Package</span></div>
+                            <a href="#" class="btn btn-primary">Enroll Now</a>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="exam-card" data-exam="selection-phase">
-                    <div class="exam-icon" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">
-                        <i class="fas fa-user-tie"></i>
+                <!-- SSC CHSL Card -->
+                <div class="exam-card" data-category="ssc">
+                    <div class="exam-header" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
+                        <div class="exam-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h3>SSC CHSL</h3>
+                        <p>Combined Higher Secondary Level</p>
                     </div>
-                    <h3>Selection Phase</h3>
-                    <p>Interview & Document verification guidance</p>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Interview Preparation</li>
-                        <li><i class="fas fa-check"></i> Document Guidance</li>
-                        <li><i class="fas fa-check"></i> Mock Interviews</li>
-                    </ul>
-                    <button class="btn btn-outline enroll-btn" data-exam="selection">Enroll Now</button>
+                    <div class="exam-body">
+                        <p>Complete preparation for SSC CHSL Tier I & II including typing test training and descriptive paper guidance.</p>
+                        
+                        <ul class="exam-features">
+                            <li><i class="fas fa-check-circle"></i> Tier I & II Preparation</li>
+                            <li><i class="fas fa-check-circle"></i> Typing Test Training</li>
+                            <li><i class="fas fa-check-circle"></i> Descriptive Paper</li>
+                            <li><i class="fas fa-check-circle"></i> 60+ Mock Tests</li>
+                        </ul>
+                        
+                        <div class="exam-meta">
+                            <div class="exam-price">₹6,499 <span>/ Complete Course</span></div>
+                            <a href="#" class="btn btn-primary">Enroll Now</a>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="exam-card" data-exam="ntpc">
-                    <div class="exam-icon" style="background: linear-gradient(135deg, #f39c12, #e67e22);">
-                        <i class="fas fa-train"></i>
+                <!-- SSC MTS Card -->
+                <div class="exam-card" data-category="ssc">
+                    <div class="exam-header" style="background: linear-gradient(135deg, #ec4899, #db2777);">
+                        <div class="exam-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <h3>SSC MTS</h3>
+                        <p>Multi-Tasking Staff Examination</p>
                     </div>
-                    <h3>Railway NTPC</h3>
-                    <p>Non-Technical Popular Categories exam preparation</p>
-                    <ul>
-                        <li><i class="fas fa-check"></i> CBT I & II</li>
-                        <li><i class="fas fa-check"></i> General Awareness</li>
-                        <li><i class="fas fa-check"></i> Mathematics</li>
-                    </ul>
-                    <button class="btn btn-outline enroll-btn" data-exam="ntpc">Enroll Now</button>
+                    <div class="exam-body">
+                        <p>Focused preparation for SSC MTS with emphasis on basic mathematics, general English, and reasoning ability.</p>
+                        
+                        <ul class="exam-features">
+                            <li><i class="fas fa-check-circle"></i> Basic Mathematics</li>
+                            <li><i class="fas fa-check-circle"></i> General English</li>
+                            <li><i class="fas fa-check-circle"></i> Reasoning Ability</li>
+                            <li><i class="fas fa-check-circle"></i> General Awareness</li>
+                        </ul>
+                        
+                        <div class="exam-meta">
+                            <div class="exam-price">₹4,999 <span>/ Complete Course</span></div>
+                            <a href="#" class="btn btn-primary">Enroll Now</a>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="exam-card" data-exam="one-day">
-                    <div class="exam-icon" style="background: linear-gradient(135deg, #1abc9c, #16a085);">
-                        <i class="fas fa-bolt"></i>
+                <!-- Selection Phase Card -->
+                <div class="exam-card" data-category="ssc">
+                    <div class="exam-header" style="background: linear-gradient(135deg, #6366f1, #4f46e5);">
+                        <div class="exam-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h3>Selection Phase</h3>
+                        <p>Interview & Document Verification</p>
                     </div>
-                    <h3>One Day Exams</h3>
-                    <p>Bank, Insurance, and other one day competitive exams</p>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Banking Exams</li>
-                        <li><i class="fas fa-check"></i> Insurance Exams</li>
-                        <li><i class="fas fa-check"></i> Other Govt. Exams</li>
-                    </ul>
-                    <button class="btn btn-outline enroll-btn" data-exam="oneday">Enroll Now</button>
+                    <div class="exam-body">
+                        <p>Expert guidance for interview preparation, document verification process, and final selection phase.</p>
+                        
+                        <ul class="exam-features">
+                            <li><i class="fas fa-check-circle"></i> Interview Preparation</li>
+                            <li><i class="fas fa-check-circle"></i> Document Guidance</li>
+                            <li><i class="fas fa-check-circle"></i> Mock Interviews</li>
+                            <li><i class="fas fa-check-circle"></i> Personality Development</li>
+                        </ul>
+                        
+                        <div class="exam-meta">
+                            <div class="exam-price">₹3,999 <span>/ Complete Package</span></div>
+                            <a href="#" class="btn btn-primary">Enroll Now</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -209,91 +1367,129 @@
     <section class="features-section" id="features">
         <div class="container">
             <div class="section-title">
-                <h2>Our Unique Features</h2>
-                <p>What makes The Repeaters Official different from others</p>
+                <h2>Why Choose The Repeaters?</h2>
+                <p>Our unique approach to mentorship ensures your success in government exams</p>
             </div>
             
             <div class="features-grid">
-                <div class="feature-box">
+                <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-user-graduate"></i>
                     </div>
-                    <h3>Personal Mentorship</h3>
-                    <p>One-on-one guidance from experienced mentors</p>
+                    <h3>Personalized Mentorship</h3>
+                    <p>One-on-one guidance from experienced mentors with track record of success</p>
                 </div>
                 
-                <div class="feature-box">
+                <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-video"></i>
                     </div>
                     <h3>Live Interactive Classes</h3>
-                    <p>Daily live classes with doubt solving sessions</p>
+                    <p>Daily live classes with real-time doubt solving and interactive sessions</p>
                 </div>
                 
-                <div class="feature-box">
+                <div class="feature-card">
                     <div class="feature-icon">
-                        <i class="fas fa-cloud-download-alt"></i>
+                        <i class="fas fa-cloud"></i>
                     </div>
-                    <h3>Google Drive Storage</h3>
-                    <p>All study materials accessible via Google Drive</p>
+                    <h3>Google Drive Access</h3>
+                    <p>All study materials, PDFs, and recordings accessible via Google Drive</p>
                 </div>
                 
-                <div class="feature-box">
+                <div class="feature-card">
                     <div class="feature-icon">
-                        <i class="fas fa-chart-bar"></i>
+                        <i class="fas fa-chart-line"></i>
                     </div>
                     <h3>Performance Analytics</h3>
-                    <p>Detailed analysis of your strengths & weaknesses</p>
+                    <p>Detailed analysis of your performance with personalized improvement plans</p>
                 </div>
                 
-                <div class="feature-box">
+                <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-mobile-alt"></i>
                     </div>
                     <h3>Mobile App Access</h3>
-                    <p>Learn on the go with our mobile application</p>
+                    <p>Learn on the go with our dedicated mobile application for Android & iOS</p>
                 </div>
                 
-                <div class="feature-box">
+                <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-file-pdf"></i>
                     </div>
-                    <h3>PDF Study Material</h3>
-                    <p>Comprehensive PDF notes for all subjects</p>
+                    <h3>Comprehensive Study Material</h3>
+                    <p>Well-researched study material covering all topics with previous year questions</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials -->
+    <!-- Testimonials Section -->
     <section class="testimonials-section" id="testimonials">
         <div class="container">
             <div class="section-title">
                 <h2>Success Stories</h2>
-                <p>Our students have secured positions in various government departments</p>
+                <p>Hear from our students who cracked their dream government jobs</p>
             </div>
             
             <div class="testimonials-slider">
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <img src="assets/images/student1.jpg" alt="Student">
-                        <div>
-                            <h4>Rahul Sharma</h4>
-                            <p>SSC CGL 2022 - AIR 45</p>
+                <div class="swiper">
+                    <div class="swiper-wrapper">
+                        <!-- Testimonial 1 -->
+                        <div class="swiper-slide">
+                            <div class="testimonial-card">
+                                <div class="testimonial-content">
+                                    "The Repeaters mentorship program completely changed my approach to SSC CGL preparation. The personalized guidance and regular mock tests helped me secure AIR 87 in my first attempt. The study material provided via Google Drive was exceptionally comprehensive."
+                                </div>
+                                <div class="testimonial-author">
+                                    <div class="author-avatar">
+                                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Rahul Sharma">
+                                    </div>
+                                    <div class="author-info">
+                                        <h4>Rahul Sharma</h4>
+                                        <p>SSC CGL 2022 - AIR 87 | Selected as Inspector</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 2 -->
+                        <div class="swiper-slide">
+                            <div class="testimonial-card">
+                                <div class="testimonial-content">
+                                    "As a working professional, I needed flexible learning options. The Repeaters' recorded lectures and Google Drive access allowed me to study at my own pace. Their NTPC course material was spot-on, and I cleared both CBTs in the first attempt."
+                                </div>
+                                <div class="testimonial-author">
+                                    <div class="author-avatar">
+                                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Priya Verma">
+                                    </div>
+                                    <div class="author-info">
+                                        <h4>Priya Verma</h4>
+                                        <p>Railway NTPC 2022 | Selected as Junior Clerk</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 3 -->
+                        <div class="swiper-slide">
+                            <div class="testimonial-card">
+                                <div class="testimonial-content">
+                                    "The One Day Exam package covered everything from Banking to Insurance exams. The faculty's expertise in shortcut methods saved me precious time during the exam. I'm grateful to The Repeaters for helping me secure a PO position in SBI."
+                                </div>
+                                <div class="testimonial-author">
+                                    <div class="author-avatar">
+                                        <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Amit Patel">
+                                    </div>
+                                    <div class="author-info">
+                                        <h4>Amit Patel</h4>
+                                        <p>SBI PO 2023 | Selected as Probationary Officer</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <p>"The Repeaters Official mentorship program helped me crack SSC CGL in my first attempt. The personalized guidance was exceptional."</p>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <img src="assets/images/student2.jpg" alt="Student">
-                        <div>
-                            <h4>Priya Singh</h4>
-                            <p>SSC CHSL 2022 - Selected</p>
-                        </div>
-                    </div>
-                    <p>"The study material and regular mock tests were exactly what I needed. Thank you team for the amazing support!"</p>
+                    
+                    <div class="swiper-pagination"></div>
                 </div>
             </div>
         </div>
@@ -303,14 +1499,15 @@
     <section class="cta-section">
         <div class="container">
             <div class="cta-content">
-                <h2>Ready to Start Your Government Job Journey?</h2>
-                <p>Join 10,000+ successful students who cracked their dream government jobs with our mentorship</p>
+                <h2>Start Your Government Job Journey Today!</h2>
+                <p>Join 12,500+ successful students who cracked SSC, NTPC, and other government exams with our proven mentorship approach.</p>
+                
                 <div class="cta-buttons">
-                    <a href="register.html" class="btn btn-primary btn-lg">
-                        <i class="fas fa-user-plus"></i> Register Now
+                    <a href="#" class="btn btn-white btn-lg">
+                        <i class="fas fa-user-plus"></i> Register for Free Demo
                     </a>
-                    <a href="https://drive.google.com" class="btn btn-google-drive" target="_blank">
-                        <i class="fab fa-google-drive"></i> Access Study Material
+                    <a href="https://drive.google.com" target="_blank" class="btn btn-transparent btn-lg">
+                        <i class="fab fa-google-drive"></i> Access Free Study Material
                     </a>
                 </div>
             </div>
@@ -327,54 +1524,57 @@
                             <i class="fas fa-redo-alt"></i>
                         </div>
                         <div class="logo-text">
-                            <h3>The Repeaters Official</h3>
-                            <p>Mentorship for Government Exams</p>
+                            <h3>The Repeaters</h3>
+                            <p>SSC | NTPC | One Day Exams</p>
                         </div>
                     </div>
-                    <p>India's leading mentorship platform for SSC, Railway, Banking and other government exams.</p>
+                    <p>India's leading mentorship platform for SSC, Railway NTPC, Banking, and all government exams. We provide personalized guidance to help you crack your dream job.</p>
+                    
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
                         <a href="#"><i class="fab fa-youtube"></i></a>
                         <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
                 
                 <div class="footer-col">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="courses.html">Courses</a></li>
-                        <li><a href="#exams">Exams</a></li>
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="#testimonials">Results</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="#exams"><i class="fas fa-chevron-right"></i> Our Courses</a></li>
+                        <li><a href="#features"><i class="fas fa-chevron-right"></i> Features</a></li>
+                        <li><a href="#testimonials"><i class="fas fa-chevron-right"></i> Success Stories</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Free Resources</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Career</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-col">
-                    <h4>Exam Categories</h4>
-                    <ul>
-                        <li><a href="#ssc-chsl">SSC CHSL</a></li>
-                        <li><a href="#ssc-cgl">SSC CGL</a></li>
-                        <li><a href="#ssc-mts">SSC MTS</a></li>
-                        <li><a href="#selection-phase">Selection Phase</a></li>
-                        <li><a href="#ntpc">Railway NTPC</a></li>
-                        <li><a href="#one-day">One Day Exams</a></li>
+                    <h3>Exam Categories</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> SSC CGL</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> SSC CHSL</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> SSC MTS</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Railway NTPC</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Banking Exams</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Insurance Exams</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-col">
-                    <h4>Contact Us</h4>
+                    <h3>Contact Us</h3>
                     <ul class="contact-info">
-                        <li><i class="fas fa-envelope"></i> support@repeatersofficial.com</li>
+                        <li><i class="fas fa-envelope"></i> support@therepeaters.in</li>
                         <li><i class="fas fa-phone"></i> +91 98765 43210</li>
-                        <li><i class="fas fa-map-marker-alt"></i> Delhi, India</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Delhi NCR, India</li>
                         <li><i class="fab fa-whatsapp"></i> +91 98765 43210</li>
                     </ul>
+                    
                     <div class="newsletter">
-                        <h5>Subscribe Newsletter</h5>
+                        <p>Subscribe for exam updates & free study material</p>
                         <div class="newsletter-form">
                             <input type="email" placeholder="Enter your email">
                             <button type="submit"><i class="fas fa-paper-plane"></i></button>
@@ -385,60 +1585,120 @@
             
             <div class="footer-bottom">
                 <p>&copy; 2024 The Repeaters Official. All Rights Reserved.</p>
-                <div class="footer-links">
-                    <a href="privacy.html">Privacy Policy</a>
-                    <a href="terms.html">Terms & Conditions</a>
-                    <a href="refund.html">Refund Policy</a>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms & Conditions</a>
+                    <a href="#">Refund Policy</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Login Modal -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <div class="modal-header">
-                <h3><i class="fas fa-sign-in-alt"></i> Login to Your Account</h3>
-            </div>
-            <div class="modal-body">
-                <form id="loginForm">
-                    <div class="form-group">
-                        <label><i class="fas fa-envelope"></i> Email</label>
-                        <input type="email" id="loginEmail" required>
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-lock"></i> Password</label>
-                        <input type="password" id="loginPassword" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block">Login</button>
-                    <div class="form-divider">OR</div>
-                    <button type="button" class="btn btn-google btn-block" id="googleLogin">
-                        <i class="fab fa-google"></i> Login with Google
-                    </button>
-                    <div class="form-footer">
-                        <p>Don't have an account? <a href="register.html">Register here</a></p>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <script src="js/main.js"></script>
-    <script src="js/auth.js"></script>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script>
-        // Firebase Configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyD_your_api_key_here",
-            authDomain: "repeaters-official.firebaseapp.com",
-            projectId: "repeaters-official",
-            storageBucket: "repeaters-official.appspot.com",
-            messagingSenderId: "1234567890",
-            appId: "1:1234567890:web:abcdef123456"
-        };
+        // Mobile Navigation Toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navMenu = document.getElementById('navMenu');
         
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
+        mobileToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileToggle.innerHTML = navMenu.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Exam Filtering
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const examCards = document.querySelectorAll('.exam-card');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                const filterValue = button.getAttribute('data-filter');
+                
+                examCards.forEach(card => {
+                    if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Testimonials Slider
+        const swiper = new Swiper('.swiper', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            loop: true,
+            breakpoints: {
+                768: {
+                    slidesPerView: 1,
+                }
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Newsletter form submission
+        const newsletterForm = document.querySelector('.newsletter-form');
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const emailInput = this.querySelector('input[type="email"]');
+                if (emailInput.value) {
+                    alert('Thank you for subscribing! You will receive exam updates and study material.');
+                    emailInput.value = '';
+                }
+            });
+        }
     </script>
 </body>
 </html>
