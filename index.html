@@ -1,30 +1,444 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login | New Pattern Mock</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Repeaters Official - SSC, CGL, MTS, NTPC Mentorship</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 </head>
-<body class="center">
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-redo-alt"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>The Repeaters Official</h1>
+                    <p>Mentorship for Government Exams</p>
+                </div>
+            </div>
+            
+            <div class="mobile-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="courses.html"><i class="fas fa-book-open"></i> Courses</a></li>
+                <li class="dropdown">
+                    <a href="#"><i class="fas fa-graduation-cap"></i> Exams <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#ssc-chsl">SSC CHSL</a></li>
+                        <li><a href="#ssc-cgl">SSC CGL</a></li>
+                        <li><a href="#ssc-mts">SSC MTS</a></li>
+                        <li><a href="#selection-phase">Selection Phase</a></li>
+                        <li><a href="#ntpc">NTPC</a></li>
+                        <li><a href="#one-day">One Day Exams</a></li>
+                    </ul>
+                </li>
+                <li><a href="#features"><i class="fas fa-star"></i> Features</a></li>
+                <li><a href="#testimonials"><i class="fas fa-comments"></i> Results</a></li>
+                <li><a href="#contact"><i class="fas fa-phone-alt"></i> Contact</a></li>
+                <li id="authLinks">
+                    <a href="login.html" class="btn btn-login"><i class="fas fa-sign-in-alt"></i> Login</a>
+                    <a href="register.html" class="btn btn-signup"><i class="fas fa-user-plus"></i> Register</a>
+                </li>
+                <li id="userMenu" style="display: none;">
+                    <div class="user-dropdown">
+                        <a href="#" id="userName"><i class="fas fa-user-circle"></i> User</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                            <li><a href="#"><i class="fas fa-book"></i> My Courses</a></li>
+                            <li><a href="#"><i class="fas fa-download"></i> Study Material</a></li>
+                            <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                            <li><a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-<div class="login-box">
-  <h2>Login with Gmail</h2>
-  <input type="email" id="email" placeholder="Enter Gmail ID" required>
-  <button onclick="login()">Login</button>
-</div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Crack Government Exams with <span>Expert Mentorship</span></h2>
+                <p>Join India's Most Effective Mentorship Program for SSC CHSL, CGL, MTS, Selection Phase, NTPC & All One Day Exams</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <h3>10,000+</h3>
+                        <p>Students Selected</p>
+                    </div>
+                    <div class="stat">
+                        <h3>98%</h3>
+                        <p>Success Rate</p>
+                    </div>
+                    <div class="stat">
+                        <h3>500+</h3>
+                        <p>Hours of Content</p>
+                    </div>
+                </div>
+                <div class="hero-buttons">
+                    <a href="register.html" class="btn btn-primary btn-lg">
+                        <i class="fas fa-rocket"></i> Start Free Trial
+                    </a>
+                    <a href="#courses" class="btn btn-secondary btn-lg">
+                        <i class="fas fa-play-circle"></i> View Demo Class
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="floating-card">
+                    <div class="exam-badge">SSC CGL</div>
+                    <div class="exam-badge">CHSL</div>
+                    <div class="exam-badge">MTS</div>
+                    <div class="exam-badge">NTPC</div>
+                    <img src="assets/images/hero-mentor.png" alt="Mentorship Program">
+                </div>
+            </div>
+        </div>
+    </section>
 
-<script>
-function login() {
-  const email = document.getElementById("email").value.trim();
-  if (email.endsWith("@gmail.com")) {
-    localStorage.setItem("user", email);
-    window.location.href = "home.html";
-  } else {
-    alert("Only Gmail login allowed");
-  }
-}
-</script>
+    <!-- Exams Section -->
+    <section class="exams-section" id="exams">
+        <div class="container">
+            <div class="section-title">
+                <h2>Comprehensive Mentorship Programs</h2>
+                <p>Specialized courses for each government exam with personalized guidance</p>
+            </div>
+            
+            <div class="exams-grid">
+                <div class="exam-card" data-exam="ssc-chsl">
+                    <div class="exam-icon" style="background: linear-gradient(135deg, #3498db, #2c3e50);">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>SSC CHSL</h3>
+                    <p>Complete preparation for Combined Higher Secondary Level exam</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Tier I & II Preparation</li>
+                        <li><i class="fas fa-check"></i> Typing Test Training</li>
+                        <li><i class="fas fa-check"></i> Descriptive Paper</li>
+                    </ul>
+                    <button class="btn btn-outline enroll-btn" data-exam="chsl">Enroll Now</button>
+                </div>
+                
+                <div class="exam-card" data-exam="ssc-cgl">
+                    <div class="exam-icon" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>SSC CGL</h3>
+                    <p>Graduate level exam preparation with advanced concepts</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> All Tier Preparation</li>
+                        <li><i class="fas fa-check"></i> Quantitative Aptitude</li>
+                        <li><i class="fas fa-check"></i> English & Reasoning</li>
+                    </ul>
+                    <button class="btn btn-outline enroll-btn" data-exam="cgl">Enroll Now</button>
+                </div>
+                
+                <div class="exam-card" data-exam="ssc-mts">
+                    <div class="exam-icon" style="background: linear-gradient(135deg, #2ecc71, #27ae60);">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h3>SSC MTS</h3>
+                    <p>Multi-Tasking Staff exam preparation with focus on basics</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Basic Mathematics</li>
+                        <li><i class="fas fa-check"></i> General English</li>
+                        <li><i class="fas fa-check"></i> Reasoning Ability</li>
+                    </ul>
+                    <button class="btn btn-outline enroll-btn" data-exam="mts">Enroll Now</button>
+                </div>
+                
+                <div class="exam-card" data-exam="selection-phase">
+                    <div class="exam-icon" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>Selection Phase</h3>
+                    <p>Interview & Document verification guidance</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Interview Preparation</li>
+                        <li><i class="fas fa-check"></i> Document Guidance</li>
+                        <li><i class="fas fa-check"></i> Mock Interviews</li>
+                    </ul>
+                    <button class="btn btn-outline enroll-btn" data-exam="selection">Enroll Now</button>
+                </div>
+                
+                <div class="exam-card" data-exam="ntpc">
+                    <div class="exam-icon" style="background: linear-gradient(135deg, #f39c12, #e67e22);">
+                        <i class="fas fa-train"></i>
+                    </div>
+                    <h3>Railway NTPC</h3>
+                    <p>Non-Technical Popular Categories exam preparation</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> CBT I & II</li>
+                        <li><i class="fas fa-check"></i> General Awareness</li>
+                        <li><i class="fas fa-check"></i> Mathematics</li>
+                    </ul>
+                    <button class="btn btn-outline enroll-btn" data-exam="ntpc">Enroll Now</button>
+                </div>
+                
+                <div class="exam-card" data-exam="one-day">
+                    <div class="exam-icon" style="background: linear-gradient(135deg, #1abc9c, #16a085);">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>One Day Exams</h3>
+                    <p>Bank, Insurance, and other one day competitive exams</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Banking Exams</li>
+                        <li><i class="fas fa-check"></i> Insurance Exams</li>
+                        <li><i class="fas fa-check"></i> Other Govt. Exams</li>
+                    </ul>
+                    <button class="btn btn-outline enroll-btn" data-exam="oneday">Enroll Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Unique Features</h2>
+                <p>What makes The Repeaters Official different from others</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3>Personal Mentorship</h3>
+                    <p>One-on-one guidance from experienced mentors</p>
+                </div>
+                
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>Live Interactive Classes</h3>
+                    <p>Daily live classes with doubt solving sessions</p>
+                </div>
+                
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <i class="fas fa-cloud-download-alt"></i>
+                    </div>
+                    <h3>Google Drive Storage</h3>
+                    <p>All study materials accessible via Google Drive</p>
+                </div>
+                
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3>Performance Analytics</h3>
+                    <p>Detailed analysis of your strengths & weaknesses</p>
+                </div>
+                
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile App Access</h3>
+                    <p>Learn on the go with our mobile application</p>
+                </div>
+                
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3>PDF Study Material</h3>
+                    <p>Comprehensive PDF notes for all subjects</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials-section" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Success Stories</h2>
+                <p>Our students have secured positions in various government departments</p>
+            </div>
+            
+            <div class="testimonials-slider">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="assets/images/student1.jpg" alt="Student">
+                        <div>
+                            <h4>Rahul Sharma</h4>
+                            <p>SSC CGL 2022 - AIR 45</p>
+                        </div>
+                    </div>
+                    <p>"The Repeaters Official mentorship program helped me crack SSC CGL in my first attempt. The personalized guidance was exceptional."</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="assets/images/student2.jpg" alt="Student">
+                        <div>
+                            <h4>Priya Singh</h4>
+                            <p>SSC CHSL 2022 - Selected</p>
+                        </div>
+                    </div>
+                    <p>"The study material and regular mock tests were exactly what I needed. Thank you team for the amazing support!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Start Your Government Job Journey?</h2>
+                <p>Join 10,000+ successful students who cracked their dream government jobs with our mentorship</p>
+                <div class="cta-buttons">
+                    <a href="register.html" class="btn btn-primary btn-lg">
+                        <i class="fas fa-user-plus"></i> Register Now
+                    </a>
+                    <a href="https://drive.google.com" class="btn btn-google-drive" target="_blank">
+                        <i class="fab fa-google-drive"></i> Access Study Material
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-redo-alt"></i>
+                        </div>
+                        <div class="logo-text">
+                            <h3>The Repeaters Official</h3>
+                            <p>Mentorship for Government Exams</p>
+                        </div>
+                    </div>
+                    <p>India's leading mentorship platform for SSC, Railway, Banking and other government exams.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="courses.html">Courses</a></li>
+                        <li><a href="#exams">Exams</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#testimonials">Results</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Exam Categories</h4>
+                    <ul>
+                        <li><a href="#ssc-chsl">SSC CHSL</a></li>
+                        <li><a href="#ssc-cgl">SSC CGL</a></li>
+                        <li><a href="#ssc-mts">SSC MTS</a></li>
+                        <li><a href="#selection-phase">Selection Phase</a></li>
+                        <li><a href="#ntpc">Railway NTPC</a></li>
+                        <li><a href="#one-day">One Day Exams</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> support@repeatersofficial.com</li>
+                        <li><i class="fas fa-phone"></i> +91 98765 43210</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Delhi, India</li>
+                        <li><i class="fab fa-whatsapp"></i> +91 98765 43210</li>
+                    </ul>
+                    <div class="newsletter">
+                        <h5>Subscribe Newsletter</h5>
+                        <div class="newsletter-form">
+                            <input type="email" placeholder="Enter your email">
+                            <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 The Repeaters Official. All Rights Reserved.</p>
+                <div class="footer-links">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms & Conditions</a>
+                    <a href="refund.html">Refund Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <h3><i class="fas fa-sign-in-alt"></i> Login to Your Account</h3>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="loginEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-lock"></i> Password</label>
+                        <input type="password" id="loginPassword" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                    <div class="form-divider">OR</div>
+                    <button type="button" class="btn btn-google btn-block" id="googleLogin">
+                        <i class="fab fa-google"></i> Login with Google
+                    </button>
+                    <div class="form-footer">
+                        <p>Don't have an account? <a href="register.html">Register here</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyD_your_api_key_here",
+            authDomain: "repeaters-official.firebaseapp.com",
+            projectId: "repeaters-official",
+            storageBucket: "repeaters-official.appspot.com",
+            messagingSenderId: "1234567890",
+            appId: "1:1234567890:web:abcdef123456"
+        };
+        
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
 </body>
 </html>
