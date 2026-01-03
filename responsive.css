@@ -1,0 +1,566 @@
+/* Responsive Design for The Repeaters Official */
+
+/* Large Desktops */
+@media (max-width: 1400px) {
+    .container {
+        max-width: 1140px;
+    }
+    
+    .hero h2 {
+        font-size: 38px;
+    }
+    
+    .exams-grid {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+}
+
+/* Tablets and Small Desktops */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 960px;
+    }
+    
+    .nav-menu {
+        gap: 20px;
+    }
+    
+    .hero .container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .hero-content, .hero-image {
+        flex: none;
+        width: 100%;
+    }
+    
+    .hero-image {
+        margin-top: 40px;
+    }
+    
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .courses-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+    
+    /* Dashboard specific */
+    .dashboard-container {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        width: 100%;
+        padding: 20px 0;
+    }
+    
+    .sidebar-menu {
+        display: flex;
+        overflow-x: auto;
+        padding: 0 20px;
+    }
+    
+    .sidebar-menu li {
+        flex-shrink: 0;
+    }
+    
+    .sidebar-menu a {
+        white-space: nowrap;
+    }
+    
+    .user-profile {
+        text-align: left;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .user-avatar {
+        margin: 0;
+    }
+}
+
+/* Tablets */
+@media (max-width: 992px) {
+    .container {
+        max-width: 720px;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background: white;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+        transition: left 0.3s;
+        overflow-y: auto;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        z-index: 1000;
+    }
+    
+    .nav-menu.active {
+        left: 0;
+    }
+    
+    .mobile-toggle {
+        display: block;
+    }
+    
+    .auth-buttons {
+        display: none;
+    }
+    
+    .hero h2 {
+        font-size: 32px;
+    }
+    
+    .section {
+        padding: 60px 0;
+    }
+    
+    .section-title h2 {
+        font-size: 28px;
+    }
+    
+    .exams-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .hero-stats {
+        justify-content: center;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cta-buttons .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    /* Courses page */
+    .courses-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .courses-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .filter-options {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Mobile Devices */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .logo-text h1 {
+        font-size: 18px;
+    }
+    
+    .hero {
+        padding: 60px 0 40px;
+    }
+    
+    .hero h2 {
+        font-size: 28px;
+    }
+    
+    .hero p {
+        font-size: 16px;
+    }
+    
+    .hero-stats {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .exams-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .courses-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .footer-links {
+        justify-content: center;
+    }
+    
+    /* Authentication pages */
+    .auth-box {
+        max-width: 100%;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .interest-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Dashboard */
+    .dashboard-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .drive-files {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Courses filter */
+    .filter-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .filter-buttons {
+        flex-direction: column;
+    }
+    
+    .filter-buttons .btn {
+        width: 100%;
+    }
+    
+    /* Testimonials */
+    .testimonial-card {
+        min-width: 100%;
+    }
+}
+
+/* Small Mobile Devices */
+@media (max-width: 576px) {
+    .logo {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .logo-text h1 {
+        font-size: 16px;
+    }
+    
+    .logo-text p {
+        font-size: 10px;
+    }
+    
+    .hero h2 {
+        font-size: 24px;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .hero-buttons .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .section-title h2 {
+        font-size: 24px;
+    }
+    
+    .feature-card, .course-card {
+        padding: 20px;
+    }
+    
+    .exam-card {
+        padding: 20px;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 10px;
+    }
+    
+    /* Dashboard */
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .drive-files {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Authentication */
+    .auth-header {
+        padding: 20px;
+    }
+    
+    .auth-body {
+        padding: 20px;
+    }
+    
+    /* Courses */
+    .course-card-detailed .course-footer {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+    
+    .btn-enroll {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Extra Small Devices */
+@media (max-width: 375px) {
+    .logo-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+    }
+    
+    .hero h2 {
+        font-size: 22px;
+    }
+    
+    .btn-lg {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+    
+    .form-control {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+    
+    .exam-card ul li {
+        font-size: 14px;
+    }
+    
+    /* Navigation dropdown fix */
+    .dropdown-menu {
+        position: static;
+        box-shadow: none;
+        border: 1px solid #e0e0e0;
+        margin-top: 10px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .navbar,
+    .footer,
+    .hero-buttons,
+    .enroll-btn,
+    .filter-buttons,
+    .mobile-toggle,
+    .auth-buttons {
+        display: none !important;
+    }
+    
+    body {
+        font-size: 12pt;
+        line-height: 1.5;
+    }
+    
+    .container {
+        max-width: 100%;
+        padding: 0;
+    }
+    
+    .course-card-detailed {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    .btn-primary {
+        background: #000;
+        color: #fff;
+        border: 2px solid #000;
+    }
+    
+    .btn-secondary {
+        border: 2px solid #000;
+        color: #000;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #1a1a1a;
+        --text-color: #ffffff;
+        --card-bg: #2d2d2d;
+        --border-color: #444444;
+    }
+    
+    body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+    }
+    
+    .course-card-detailed,
+    .exam-card,
+    .feature-card,
+    .testimonial-card,
+    .auth-box,
+    .modal-content,
+    .courses-sidebar {
+        background-color: var(--card-bg);
+        color: var(--text-color);
+    }
+    
+    .form-control {
+        background-color: var(--card-bg);
+        border-color: var(--border-color);
+        color: var(--text-color);
+    }
+    
+    .section-title h2,
+    .course-content h3,
+    .exam-card h3,
+    .feature-card h3 {
+        color: var(--text-color);
+    }
+    
+    .course-description,
+    .exam-card p,
+    .feature-card p {
+        color: #cccccc;
+    }
+}
+
+/* Landscape Mode */
+@media (max-height: 600px) and (orientation: landscape) {
+    .auth-container {
+        padding: 10px;
+    }
+    
+    .auth-box {
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    .hero {
+        padding: 40px 0;
+    }
+    
+    .section {
+        padding: 40px 0;
+    }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .btn,
+    .nav-menu a,
+    .dropdown-menu a,
+    .sidebar-list a {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    .form-control {
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+    
+    .mobile-toggle {
+        padding: 10px;
+    }
+}
+
+/* Foldable Devices */
+@media (max-width: 300px) {
+    .logo-text h1 {
+        font-size: 14px;
+    }
+    
+    .hero h2 {
+        font-size: 20px;
+    }
+    
+    .btn {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+}
+
+/* Performance Optimizations for Slow Connections */
+@media (prefers-reduced-data: reduce) {
+    * {
+        background-image: none !important;
+    }
+    
+    .hero-image img,
+    .testimonial-header img {
+        display: none;
+    }
+}
+
+/* Accessibility: Focus Styles */
+@media (prefers-reduced-transparency: reduce) {
+    .modal {
+        background: rgba(0, 0, 0, 0.9);
+    }
+}
+
+/* Loading States */
+@media (prefers-reduced-motion: reduce) {
+    .loading-overlay .spinner {
+        display: none;
+    }
+}
