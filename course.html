@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses - The Repeaters Official</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <style>
+        .courses-hero {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 80px 0 50px;
+            text-align: center;
+        }
+        
+        .courses-hero h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+        
+        .courses-hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        
+        .courses-filter {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-top: -30px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .filter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .filter-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .filter-group {
+            margin-bottom: 15px;
+        }
+        
+        .filter-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        
+        .filter-select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            background: white;
+            cursor: pointer;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+        
+        .courses-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .course-category {
+            margin-bottom: 50px;
+        }
+        
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .category-header h2 {
+            color: #2c3e50;
+            font-size: 28px;
+        }
+        
+        .category-count {
+            background: #3498db;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .course-card-detailed {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .course-card-detailed:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .course-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #e74c3c;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 2;
+        }
+        
+        .course-img {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .course-img:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.1);
+        }
+        
+        .course-content {
+            padding: 25px;
+        }
+        
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .course-category-tag {
+            background: #e8f4fc;
+            color: #3498db;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .course-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #f39c12;
+        }
+        
+        .course-content h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .course-description {
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .course-features {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        
+        .course-features li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .course-features li i {
+            color: #2ecc71;
+            width: 20px;
+        }
+        
+        .course-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .course-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        
+        .course-price span {
+            font-size: 14px;
+            color: #7f8c8d;
+            text-decoration: line-through;
+            margin-left: 5px;
+        }
+        
+        .btn-enroll {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+        
+        .btn-enroll:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .course-duration {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        .instructor-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .instructor-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #3498db;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+        
+        .instructor-name {
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        
+        .instructor-role {
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+        
+        .courses-sidebar {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        
+        .sidebar-title {
+            font-size: 18px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .sidebar-list {
+            list-style: none;
+        }
+        
+        .sidebar-list li {
+            margin-bottom: 15px;
+        }
+        
+        .sidebar-list a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #666;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+        
+        .sidebar-list a:hover,
+        .sidebar-list a.active {
+            background: #e8f4fc;
+            color: #3498db;
+        }
+        
+        .free-resources {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 50px;
+        }
+        
+        .pagination a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            color: #666;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .pagination a:hover,
+        .pagination a.active {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+        
+        .courses-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 30px;
+        }
+        
+        .no-courses {
+            text-align: center;
+            padding: 50px;
+            color: #7f8c8d;
+        }
+        
+        .no-courses i {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #bdc3c7;
+        }
+        
+        @media (max-width: 992px) {
+            .courses-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .courses-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-redo-alt"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>The Repeaters Official</h1>
+                    <p>Mentorship for Government Exams</p>
+                </div>
+            </div>
+            
+            <div class="mobile-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="courses.html" class="active"><i class="fas fa-book-open"></i> Courses</a></li>
+                <li class="dropdown">
+                    <a href="#"><i class="fas fa-graduation-cap"></i> Exams <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#ssc-chsl">SSC CHSL</a></li>
+                        <li><a href="#ssc-cgl">SSC CGL</a></li>
+                        <li><a href="#ssc-mts">SSC MTS</a></li>
+                        <li><a href="#selection-phase">Selection Phase</a></li>
+                        <li><a href="#ntpc">NTPC</a></li>
+                        <li><a href="#one-day">One Day Exams</a></li>
+                    </ul>
+                </li>
+                <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="#"><i class="fas fa-question-circle"></i> Help</a></li>
+                <li id="authLinks">
+                    <a href="login.html" class="btn btn-login"><i class="fas fa-sign-in-alt"></i> Login</a>
+                    <a href="register.html" class="btn btn-signup"><i class="fas fa-user-plus"></i> Register</a>
+                </li>
+                <li id="userMenu" style="display: none;">
+                    <div class="user-dropdown">
+                        <a href="#" id="userName"><i class="fas fa-user-circle"></i> User</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                            <li><a href="#"><i class="fas fa-book"></i> My Courses</a></li>
+                            <li><a href="#"><i class="fas fa-download"></i> Study Material</a></li>
+                            <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                            <li><a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="courses-hero">
+        <div class="container">
+            <h1>Comprehensive Mentorship Programs</h1>
+            <p>Choose from our specialized courses for SSC, Railway, Banking and other government exams with expert guidance and comprehensive study materials.</p>
+        </div>
+    </section>
+
+    <!-- Courses Filter -->
+    <section class="courses-filter">
+        <div class="container">
+            <div class="filter-header">
+                <h3>Find Your Perfect Course</h3>
+                <span id="courseCount">12 Courses Found</span>
+            </div>
+            
+            <div class="filter-options">
+                <div class="filter-group">
+                    <label>Exam Category</label>
+                    <select class="filter-select" id="examCategory">
+                        <option value="all">All Exams</option>
+                        <option value="ssc-chsl">SSC CHSL</option>
+                        <option value="ssc-cgl">SSC CGL</option>
+                        <option value="ssc-mts">SSC MTS</option>
+                        <option value="selection-phase">Selection Phase</option>
+                        <option value="ntpc">Railway NTPC</option>
+                        <option value="one-day">One Day Exams</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label>Course Level</label>
+                    <select class="filter-select" id="courseLevel">
+                        <option value="all">All Levels</option>
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="advanced">Advanced</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label>Sort By</label>
+                    <select class="filter-select" id="sortBy">
+                        <option value="popular">Most Popular</option>
+                        <option value="newest">Newest First</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="rating">Highest Rated</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="filter-buttons">
+                <button class="btn btn-outline" id="resetFilters">
+                    <i class="fas fa-redo"></i> Reset Filters
+                </button>
+                <button class="btn btn-primary" id="applyFilters">
+                    <i class="fas fa-filter"></i> Apply Filters
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="courses-section">
+        <div class="container">
+            <div class="courses-container">
+                <!-- Sidebar -->
+                <div class="courses-sidebar">
+                    <h4 class="sidebar-title">Course Categories</h4>
+                    <ul class="sidebar-list">
+                        <li><a href="#" class="active" data-category="all"><i class="fas fa-list"></i> All Courses</a></li>
+                        <li><a href="#" data-category="ssc-chsl"><i class="fas fa-file-alt"></i> SSC CHSL</a></li>
+                        <li><a href="#" data-category="ssc-cgl"><i class="fas fa-chart-line"></i> SSC CGL</a></li>
+                        <li><a href="#" data-category="ssc-mts"><i class="fas fa-tasks"></i> SSC MTS</a></li>
+                        <li><a href="#" data-category="selection-phase"><i class="fas fa-user-tie"></i> Selection Phase</a></li>
+                        <li><a href="#" data-category="ntpc"><i class="fas fa-train"></i> Railway NTPC</a></li>
+                        <li><a href="#" data-category="one-day"><i class="fas fa-bolt"></i> One Day Exams</a></li>
+                        <li><a href="#" data-category="free"><i class="fas fa-gift"></i> Free Courses</a></li>
+                    </ul>
+                    
+                    <div class="free-resources">
+                        <h4><i class="fas fa-gift"></i> Free Resources</h4>
+                        <p>Get free study materials and demo classes</p>
+                        <button class="btn btn-outline" style="background: white; color: #27ae60; margin-top: 15px;">
+                            <i class="fas fa-download"></i> Download Now
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Main Courses Content -->
+                <div class="courses-main">
+                    <!-- SSC CHSL Courses -->
+                    <div class="course-category" id="ssc-chsl-courses">
+                        <div class="category-header">
+                            <h2>SSC CHSL Courses</h2>
+                            <span class="category-count">3 Courses</span>
+                        </div>
+                        
+                        <div class="courses-grid">
+                            <!-- Course 1 -->
+                            <div class="course-card-detailed" data-category="ssc-chsl" data-level="beginner">
+                                <div class="course-badge">Most Popular</div>
+                                <div class="course-img">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                                <div class="course-content">
+                                    <div class="course-meta">
+                                        <span class="course-category-tag">SSC CHSL</span>
+                                        <div class="course-rating">
+                                            <i class="fas fa-star"></i>
+                                            <span>4.8 (124 reviews)</span>
+                                        </div>
+                                    </div>
+                                    <h3>SSC CHSL Complete Course 2024</h3>
+                                    <p class="course-description">
+                                        Comprehensive preparation for SSC CHSL Tier I & II including Typing Test and Descriptive Paper.
+                                    </p>
+                                    <ul class="course-features">
+                                        <li><i class="fas fa-check"></i> 200+ Hours Live Classes</li>
+                                        <li><i class="fas fa-check"></i> 50+ Mock Tests</li>
+                                        <li><i class="fas fa-check"></i> Personal Mentorship</li>
+                                        <li><i class="fas fa-check"></i> Doubt Clearing Sessions</li>
+                                    </ul>
+                                    
+                                    <div class="instructor-info">
+                                        <div class="instructor-avatar">RS</div>
+                                        <div>
+                                            <div class="instructor-name">Rahul Sharma</div>
+                                            <div class="instructor-role">SSC Expert (8+ Years)</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="course-footer">
+                                        <div>
+                                            <div class="course-price">₹4,999 <span>₹7,999</span></div>
+                                            <div class="course-duration">
+                                                <i class="fas fa-clock"></i> 6 Months Access
+                                            </div>
+                                        </div>
+                                        <button class="btn-enroll enroll-btn" data-course="ssc-chsl-complete">
+                                            <i class="fas fa-shopping-cart"></i> Enroll Now
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Course 2 -->
+                            <div class="course-card-detailed" data-category="ssc-chsl" data-level="intermediate">
+                                <div class="course-badge">Best Value</div>
+                                <div class="course-img" style="background: linear-gradient(135deg, #3498db, #2c3e50);">
+                                    <i class="fas fa-keyboard"></i>
+                                </div>
+                                <div class="course-content">
+                                    <div class="course-meta">
+                                        <span class="course-category-tag">SSC CHSL</span>
+                                        <div class="course-rating">
+                                            <i class="fas fa-star"></i>
+                                            <span>4.7 (89 reviews)</span>
+                                        </div>
+                                    </div>
+                                    <h3>Typing Test Mastery Program</h3>
+                                    <p class="course-description">
+                                        Specialized course to master English and Hindi typing for SSC CHSL Tier II.
+                                    </p>
+                                    <ul class="course-features">
+                                        <li><i class="fas fa-check"></i> Typing Practice Software</li>
+                                        <li><i class="fas fa-check"></i> Speed Building Exercises</li>
+                                        <li><i class="fas fa-check"></i> Accuracy Improvement</li>
+                                        <li><i class="fas fa-check"></i> Mock Typing Tests</li>
+                                    </ul>
+                                    
+                                    <div class="instructor-info">
+                                        <div class="instructor-avatar">PS</div>
+                                        <div>
+                                            <div class="instructor-name">Priya Singh</div>
+                                            <div class="instructor-role">Typing Expert</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="course-footer">
+                                        <div>
+                                            <div class="course-price">₹2,499 <span>₹3,999</span></div>
+                                            <div class="course-duration">
+                                                <i class="fas fa-clock"></i> 3 Months Access
+                                            </div>
+                                        </div>
+                                        <button class="btn-enroll enroll-btn" data-course="typing-mastery">
+                                            <i class="fas fa-shopping-cart"></i> Enroll Now
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- SSC CGL Courses -->
+                    <div class="course-category" id="ssc-cgl-courses">
+                        <div class="category-header">
+                            <h2>SSC CGL Courses</h2>
+                            <span class="category-count">4 Courses</span>
+                        </div>
+                        
+                        <div class="courses-grid">
+                            <!-- Course 1 -->
+                            <div class="course-card-detailed" data-category="ssc-cgl" data-level="advanced">
+                                <div class="course-badge">Premium</div>
+                                <div class="course-img" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="course-content">
+                                    <div class="course-meta">
+                                        <span class="course-category-tag">SSC CGL</span>
+                                        <div class="course-rating">
+                                            <i class="fas fa-star"></i>
+                                            <span>4.9 (210 reviews)</span>
+                                        </div>
+                                    </div>
+                                    <h3>SSC CGL Tier I, II, III & IV</h3>
+                                    <p class="course-description">
+                                        Complete package for all tiers of SSC CGL with advanced concepts and problem-solving techniques.
+                                    </p>
+                                    <ul class="course-features">
+                                        <li><i class="fas fa-check"></i> All Tier Preparation</li>
+                                        <li><i class="fas fa-check"></i> 300+ Hours Content</li>
+                                        <li><i class="fas fa-check"></i> Descriptive Paper Guidance</li>
+                                        <li><i class="fas fa-check"></i> Interview Preparation</li>
+                                    </ul>
+                                    
+                                    <div class="instructor-info">
+                                        <div class="instructor-avatar">AK</div>
+                                        <div>
+                                            <div class="instructor-name">Amit Kumar</div>
+                                            <div class="instructor-role">SSC CGL Topper</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="course-footer">
+                                        <div>
+                                            <div class="course-price">₹7,999 <span>₹12,999</span></div>
+                                            <div class="course-duration">
+                                                <i class="fas fa-clock"></i> 10 Months Access
+                                            </div>
+                                        </div>
+                                        <button class="btn-enroll enroll-btn" data-course="ssc-cgl-complete">
+                                            <i class="fas fa-shopping-cart"></i> Enroll Now
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Course 2 -->
+                            <div class="course-card-detailed" data-category="ssc-cgl" data-level="intermediate">
+                                <div class="course-badge">New</div>
+                                <div class="course-img" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <div class="course-content">
+                                    <div class="course-meta">
+                                        <span class="course-category-tag">SSC CGL</span>
+                                        <div class="course-rating">
+                                            <i class="fas fa-star"></i>
+                                            <span>4.6 (156 reviews)</span>
+                                        </div>
+                                    </div>
+                                    <h3>Advanced Quantitative Aptitude</h3>
+                                    <p class="course-description">
+                                        Master advanced mathematics and quantitative aptitude for SSC CGL Tier II.
+                                    </p>
+                                    <ul class="course-features">
+                                        <li><i class="fas fa-check"></i> Advanced Concepts</li>
+                                        <li><i class="fas fa-check"></i> Shortcut Techniques</li>
+                                        <li><i class="fas fa-check"></i> 1000+ Practice Questions</li>
+                                        <li><i class="fas fa-check"></i> Speed & Accuracy Training</li>
+                                    </ul>
+                                    
+                                    <div class="instructor-info">
+                                        <div class="instructor-avatar">MS</div>
+                                        <div>
+                                            <div class="instructor-name">Mohit Sharma</div>
+                                            <div class="instructor-role">Maths Expert</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="course-footer">
+                                        <div>
+                                            <div class="course-price">₹3,499 <span>₹5,999</span></div>
+                                            <div class="course-duration">
+                                                <i class="fas fa-clock"></i> 4 Months Access
+                                            </div>
+                                        </div>
+                                        <button class="btn-enroll enroll-btn" data-course="quantitative-aptitude">
+                                            <i class="fas fa-shopping-cart"></i> Enroll Now
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Free Courses -->
+                    <div class="course-category" id="free-courses">
+                        <div class="category-header">
+                            <h2>Free Courses & Demos</h2>
+                            <span class="category-count">5 Courses</span>
+                        </div>
+                        
+                        <div class="courses-grid">
+                            <!-- Free Course 1 -->
+                            <div class="course-card-detailed" data-category="free" data-level="beginner">
+                                <div class="course-badge">Free</div>
+                                <div class="course-img" style="background: linear-gradient(135deg, #2ecc71, #27ae60);">
+                                    <i class="fas fa-play-circle"></i>
+                                </div>
+                                <div class="course-content">
+                                    <div class="course-meta">
+                                        <span class="course-category-tag">Free Course</span>
+                                        <div class="course-rating">
+                                            <i class="fas fa-star"></i>
+                                            <span>4.8 (340 reviews)</span>
+                                        </div>
+                                    </div>
+                                    <h3>SSC Exam Strategy & Tips</h3>
+                                    <p class="course-description">
+                                        Free introductory course covering exam pattern, preparation strategy, and time management.
+                                    </p>
+                                    <ul class="course-features">
+                                        <li><i class="fas fa-check"></i> Exam Pattern Analysis</li>
+                                        <li><i class="fas fa-check"></i> Preparation Strategy</li>
+                                        <li><i class="fas fa-check"></i> Time Management Tips</li>
+                                        <li><i class="fas fa-check"></i> Free Study Plan</li>
+                                    </ul>
+                                    
+                                    <div class="course-footer">
+                                        <div>
+                                            <div class="course-price">FREE</div>
+                                            <div class="course-duration">
+                                                <i class="fas fa-clock"></i> Lifetime Access
+                                            </div>
+                                        </div>
+                                        <button class="btn-enroll enroll-btn" data-course="free-strategy">
+                                            <i class="fas fa-play"></i> Start Learning
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination">
+                <a href="#" class="active">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#"><i class="fas fa-chevron-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <!-- Same footer as index.html -->
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-redo-alt"></i>
+                        </div>
+                        <div class="logo-text">
+                            <h3>The Repeaters Official</h3>
+                            <p>Mentorship for Government Exams</p>
+                        </div>
+                    </div>
+                    <p>India's leading mentorship platform for SSC, Railway, Banking and other government exams.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="courses.html">Courses</a></li>
+                        <li><a href="#exams">Exams</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#testimonials">Results</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Exam Categories</h4>
+                    <ul>
+                        <li><a href="#ssc-chsl">SSC CHSL</a></li>
+                        <li><a href="#ssc-cgl">SSC CGL</a></li>
+                        <li><a href="#ssc-mts">SSC MTS</a></li>
+                        <li><a href="#selection-phase">Selection Phase</a></li>
+                        <li><a href="#ntpc">Railway NTPC</a></li>
+                        <li><a href="#one-day">One Day Exams</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> support@repeatersofficial.com</li>
+                        <li><i class="fas fa-phone"></i> +91 98765 43210</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Delhi, India</li>
+                        <li><i class="fab fa-whatsapp"></i> +91 98765 43210</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 The Repeaters Official. All Rights Reserved.</p>
+                <div class="footer-links">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms & Conditions</a>
+                    <a href="refund.html">Refund Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Enrollment Modal -->
+    <div id="enrollmentModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <h3><i class="fas fa-graduation-cap"></i> Enroll in Course</h3>
+            </div>
+            <div class="modal-body">
+                <div id="enrollmentContent">
+                    <!-- Content will be loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (user) {
+                document.getElementById('authLinks').style.display = 'none';
+                document.getElementById('userMenu').style.display = 'block';
+                document.getElementById('userName').innerHTML = `<i class="fas fa-user-circle"></i> ${user.fullName || user.name || 'User'}`;
+            }
+            
+            // Filter functionality
+            const examCategory = document.getElementById('examCategory');
+            const courseLevel = document.getElementById('courseLevel');
+            const sortBy = document.getElementById('sortBy');
+            const applyFilters = document.getElementById('applyFilters');
+            const resetFilters = document.getElementById('resetFilters');
+            const courseCount = document.getElementById('courseCount');
+            const sidebarLinks = document.querySelectorAll('.sidebar-list a');
+            const enrollButtons = document.querySelectorAll('.enroll-btn');
+            const enrollmentModal = document.getElementById('enrollmentModal');
+            const closeModal = document.querySelector('.close-modal');
+            
+            // Filter courses
+            function filterCourses() {
+                const selectedCategory = examCategory.value;
+                const selectedLevel = courseLevel.value;
+                const selectedSort = sortBy.value;
+                
+                const courseCards = document.querySelectorAll('.course-card-detailed');
+                let visibleCount = 0;
+                
+                courseCards.forEach(card => {
+                    const cardCategory = card.getAttribute('data-category');
+                    const cardLevel = card.getAttribute('data-level');
+                    
+                    let showCard = true;
+                    
+                    // Filter by category
+                    if (selectedCategory !== 'all' && cardCategory !== selectedCategory) {
+                        showCard = false;
+                    }
+                    
+                    // Filter by level
+                    if (selectedLevel !== 'all' && cardLevel !== selectedLevel) {
+                        showCard = false;
+                    }
+                    
+                    // Show/hide card
+                    if (showCard) {
+                        card.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                // Update course count
+                courseCount.textContent = `${visibleCount} Courses Found`;
+                
+                // Show/hide categories based on visible courses
+                document.querySelectorAll('.course-category').forEach(category => {
+                    const categoryCards = category.querySelectorAll('.course-card-detailed');
+                    const visibleCategoryCards = Array.from(categoryCards).filter(card => 
+                        card.style.display !== 'none'
+                    );
+                    
+                    if (visibleCategoryCards.length > 0) {
+                        category.style.display = 'block';
+                        const countSpan = category.querySelector('.category-count');
+                        if (countSpan) {
+                            countSpan.textContent = `${visibleCategoryCards.length} Courses`;
+                        }
+                    } else {
+                        category.style.display = 'none';
+                    }
+                });
+            }
+            
+            // Apply filters
+            applyFilters.addEventListener('click', filterCourses);
+            
+            // Reset filters
+            resetFilters.addEventListener('click', function() {
+                examCategory.value = 'all';
+                courseLevel.value = 'all';
+                sortBy.value = 'popular';
+                filterCourses();
+            });
+            
+            // Sidebar category filter
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Update active class
+                    sidebarLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Filter by category
+                    const category = this.getAttribute('data-category');
+                    examCategory.value = category === 'all' ? 'all' : category;
+                    filterCourses();
+                    
+                    // Scroll to category
+                    if (category !== 'all') {
+                        const categoryElement = document.getElementById(`${category}-courses`);
+                        if (categoryElement) {
+                            categoryElement.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }
+                });
+            });
+            
+            // Enrollment functionality
+            enrollButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const courseName = this.closest('.course-card-detailed').querySelector('h3').textContent;
+                    const coursePrice = this.closest('.course-card-detailed').querySelector('.course-price').textContent;
+                    const courseId = this.getAttribute('data-course');
+                    
+                    // Check if user is logged in
+                    if (!user) {
+                        window.location.href = 'login.html?redirect=courses&course=' + courseId;
+                        return;
+                    }
+                    
+                    // Show enrollment modal
+                    showEnrollmentModal(courseName, coursePrice, courseId);
+                });
+            });
+            
+            // Close modal
+            closeModal.addEventListener('click', function() {
+                enrollmentModal.style.display = 'none';
+            });
+            
+            window.addEventListener('click', function(e) {
+                if (e.target === enrollmentModal) {
+                    enrollmentModal.style.display = 'none';
+                }
+            });
+            
+            function showEnrollmentModal(courseName, coursePrice, courseId) {
+                const isFree = coursePrice === 'FREE';
+                
+                document.getElementById('enrollmentContent').innerHTML = `
+                    <div class="enrollment-details">
+                        <h4>${courseName}</h4>
+                        <p style="color: #7f8c8d; margin-bottom: 20px;">Complete the enrollment process to get access to this course</p>
+                        
+                        <div class="price-summary" style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <span>Course Price:</span>
+                                <strong>${coursePrice}</strong>
+                            </div>
+                            ${!isFree ? `
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <span>Discount:</span>
+                                <strong style="color: #2ecc71;">-₹3,000</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; font-size: 18px; font-weight: bold; color: #2c3e50;">
+                                <span>Final Price:</span>
+                                <strong>${coursePrice}</strong>
+                            </div>
+                            ` : ''}
+                        </div>
+                        
+                        ${!isFree ? `
+                        <form id="paymentForm">
+                            <div class="form-group">
+                                <label>Select Payment Method</label>
+                                <div class="payment-options" style="display: grid; gap: 10px; margin-top: 10px;">
+                                    <label style="display: flex; align-items: center; gap: 10px; padding: 10px; border: 2px solid #e0e0e0; border-radius: 8px; cursor: pointer;">
+                                        <input type="radio" name="payment" value="card" checked>
+                                        <i class="fas fa-credit-card"></i> Credit/Debit Card
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 10px; padding: 10px; border: 2px solid #e0e0e0; border-radius: 8px; cursor: pointer;">
+                                        <input type="radio" name="payment" value="upi">
+                                        <i class="fas fa-mobile-alt"></i> UPI
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 10px; padding: 10px; border: 2px solid #e0e0e0; border-radius: 8px; cursor: pointer;">
+                                        <input type="radio" name="payment" value="netbanking">
+                                        <i class="fas fa-university"></i> Net Banking
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-block" style="margin-top: 20px;">
+                                <i class="fas fa-lock"></i> Pay Securely
+                            </button>
+                        </form>
+                        ` : `
+                        <button id="freeEnroll" class="btn btn-primary btn-block">
+                            <i class="fas fa-user-plus"></i> Enroll for Free
+                        </button>
+                        `}
+                        
+                        <div style="margin-top: 20px; font-size: 12px; color: #7f8c8d; text-align: center;">
+                            <p><i class="fas fa-shield-alt"></i> Secure Payment • 7-Day Refund Policy • 24/7 Support</p>
+                        </div>
+                    </div>
+                `;
+                
+                enrollmentModal.style.display = 'flex';
+                
+                // Handle free enrollment
+                const freeEnrollBtn = document.getElementById('freeEnroll');
+                if (freeEnrollBtn) {
+                    freeEnrollBtn.addEventListener('click', function() {
+                        // Simulate enrollment
+                        alert(`Successfully enrolled in ${courseName}! You can now access the course from your dashboard.`);
+                        enrollmentModal.style.display = 'none';
+                        
+                        // Update user's enrolled courses
+                        if (user) {
+                            user.enrolledCourses = user.enrolledCourses || [];
+                            user.enrolledCourses.push({
+                                id: courseId,
+                                name: courseName,
+                                enrolledDate: new Date().toISOString(),
+                                type: 'free'
+                            });
+                            localStorage.setItem('user', JSON.stringify(user));
+                        }
+                    });
+                }
+                
+                // Handle payment form
+                const paymentForm = document.getElementById('paymentForm');
+                if (paymentForm) {
+                    paymentForm.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        
+                        // Simulate payment processing
+                        const submitBtn = paymentForm.querySelector('button[type="submit"]');
+                        const originalText = submitBtn.innerHTML;
+                        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                        submitBtn.disabled = true;
+                        
+                        setTimeout(() => {
+                            alert(`Payment successful! You are now enrolled in ${courseName}.`);
+                            enrollmentModal.style.display = 'none';
+                            
+                            // Update user's enrolled courses
+                            if (user) {
+                                user.enrolledCourses = user.enrolledCourses || [];
+                                user.enrolledCourses.push({
+                                    id: courseId,
+                                    name: courseName,
+                                    enrolledDate: new Date().toISOString(),
+                                    type: 'paid',
+                                    price: coursePrice
+                                });
+                                localStorage.setItem('user', JSON.stringify(user));
+                            }
+                        }, 2000);
+                    });
+                }
+            }
+            
+            // Initialize filters
+            filterCourses();
+        });
+    </script>
+</body>
+</html>
